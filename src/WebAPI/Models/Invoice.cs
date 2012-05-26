@@ -1,6 +1,6 @@
 using System;
 
-namespace WebAPI.Controllers
+namespace WebAPI.Models
 {
     public class Invoice
     {

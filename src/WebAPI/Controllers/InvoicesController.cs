@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
@@ -20,7 +21,7 @@ namespace WebAPI.Controllers
         // GET /api/invoices/5
         public HttpResponseMessage<Invoice> Get(string invoiceNumber)
         {
-            //TODO: Serve a 404 instead? 
+            //TODO: Serve a 404 or 204 instead? 
             var invoice = m_InvoiceRepository.FirstOrDefault(inv => inv.InvoiceNumber == invoiceNumber);
             if (invoice == null)
                 return new HttpResponseMessage<Invoice>(HttpStatusCode.OK);
