@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{87063B50-A13C-48F6-874F-F4F16B0AF513}</ProjectGuid>
+    <ProjectGuid>{B823016C-AC86-48EF-94D9-A094AD0D64C9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WebAPI.Model</RootNamespace>
-    <AssemblyName>WebAPI.Model</AssemblyName>
+    <RootNamespace>WebAPI.Data</RootNamespace>
+    <AssemblyName>WebAPI.Data</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -35,11 +35,8 @@
       <HintPath>..\packages\EntityFramework.4.3.1\lib\net40\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,20 +44,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\IRepository.cs" />
+    <Compile Include="DTO\InvoiceDTO.cs" />
+    <Compile Include="Extensions\InvoiceDtoExtensions.cs" />
+    <Compile Include="Extensions\InvoiceExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WebAPIDemodb.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>WebAPIDemodb.edmx</DependentUpon>
-    </Compile>
+    <Compile Include="Repositories\InvoiceRepository.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
-    <EntityDeploy Include="WebAPIDemodb.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>WebAPIDemodb.Designer.cs</LastGenOutput>
-    </EntityDeploy>
+    <ProjectReference Include="..\WebAPI.Model\WebAPI.Model.csproj">
+      <Project>{87063B50-A13C-48F6-874F-F4F16B0AF513}</Project>
+      <Name>WebAPI.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

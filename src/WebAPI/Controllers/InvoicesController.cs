@@ -4,36 +4,45 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using WebAPI.Models;
+using WebAPI.Data.DTO;
+using WebAPI.Data.Extensions;
+using WebAPI.Data.Repositories;
 
 namespace WebAPI.Controllers
 {
     public class InvoicesController : ApiController
     {
-        private static readonly List<Invoice> m_InvoiceRepository = new List<Invoice>();  
+        //private static readonly List<InvoiceDTO> m_InvoiceRepository = new List<InvoiceDTO>();  
+        
+        private InvoiceRepository m_InvoiceRepository = new InvoiceRepository();
 
         // GET /api/invoices
-        public HttpResponseMessage<List<Invoice>> Get()
+        public HttpResponseMessage<IEnumerable<InvoiceDTO>> Get()
         {
-            return new HttpResponseMessage<List<Invoice>>(m_InvoiceRepository);
+            var invoices = m_InvoiceRepository.GetAll();
+
+            var dtoList = invoices.Select(invoice => invoice.ToDto()).ToList();
+
+            return new HttpResponseMessage<IEnumerable<InvoiceDTO>>(dtoList);
         }
 
         // GET /api/invoices/5
-        public HttpResponseMessage<Invoice> Get(string invoiceNumber)
+        public HttpResponseMessage<InvoiceDTO> Get(string invoiceNumber)
         {
             //TODO: Serve a 404 or 204 instead? 
-            var invoice = m_InvoiceRepository.FirstOrDefault(inv => inv.InvoiceNumber == invoiceNumber);
+            var invoice = m_InvoiceRepository.FindByInvoiceNumber(invoiceNumber).ToDto();
+            
             if (invoice == null)
-                return new HttpResponseMessage<Invoice>(HttpStatusCode.OK);
+                return new HttpResponseMessage<InvoiceDTO>(HttpStatusCode.OK);
 
-            return new HttpResponseMessage<Invoice>(invoice);
+            return new HttpResponseMessage<InvoiceDTO>(invoice);
         }
 
         // POST /api/invoices
-        public HttpResponseMessage Post(Invoice invoice)
+        public HttpResponseMessage Post(InvoiceDTO invoice)
         {
-            m_InvoiceRepository.Add(invoice);
-            var response = new HttpResponseMessage<Invoice>(invoice, HttpStatusCode.Created);
+            m_InvoiceRepository.Add(invoice.ToEntity());
+            var response = new HttpResponseMessage<InvoiceDTO>(invoice, HttpStatusCode.Created);
 
             response.Headers.Location = new Uri(Request.RequestUri + invoice.InvoiceNumber);
 
@@ -41,30 +50,28 @@ namespace WebAPI.Controllers
         }
 
         // PUT /api/invoices/5
-        public HttpResponseMessage Put(string invoiceNumber, string newValue)
-        {
+        //public HttpResponseMessage Put(string invoiceNumber, string newValue)
+        //{
 
-            //TODO: Should update via EF.
-            var invoice = m_InvoiceRepository.FirstOrDefault(inv => inv.InvoiceNumber == invoiceNumber);
+        //    //TODO: Should update via EF.
+        //    var invoice = m_InvoiceRepository.FindByInvoiceNumber(invoiceNumber).ToDto();
 
-            if (invoice == null)
-                return new HttpResponseMessage(HttpStatusCode.NotFound);
+        //    if (invoice == null)
+        //        return new HttpResponseMessage(HttpStatusCode.NotFound);
 
-            invoice.InvoiceNumber = newValue;
+        //    invoice.InvoiceNumber = newValue;
 
-            m_InvoiceRepository.RemoveAll(inv => inv.InvoiceNumber == invoiceNumber);
-            m_InvoiceRepository.Add(invoice);
+        //    m_InvoiceRepository.RemoveAll(inv => inv.InvoiceNumber == invoiceNumber);
+        //    m_InvoiceRepository.Add(invoice);
 
-            return new HttpResponseMessage(HttpStatusCode.OK);
-        }
+        //    return new HttpResponseMessage(HttpStatusCode.OK);
+        //}
 
         // DELETE /api/invoice/5
         public HttpResponseMessage Delete(string invoiceNumber)
         {
-            var invoice = m_InvoiceRepository.FirstOrDefault(inv => inv.InvoiceNumber == invoiceNumber);
-
-            if (invoice == null)
-                return new HttpResponseMessage(HttpStatusCode.NotFound);
+            //ToDo: Need to get some response back here
+            m_InvoiceRepository.DeleteByInvoiceNumber(invoiceNumber);
 
             //ToDo: No content for Deletes, right?
             return new HttpResponseMessage(HttpStatusCode.NoContent);

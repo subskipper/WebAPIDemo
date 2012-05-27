@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "WebAPI\WebAPI.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI.Model", "WebAPI.Model\WebAPI.Model.csproj", "{87063B50-A13C-48F6-874F-F4F16B0AF513}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI.Data", "WebAPI.Data\WebAPI.Data.csproj", "{B823016C-AC86-48EF-94D9-A094AD0D64C9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,16 @@ Global
 		{87063B50-A13C-48F6-874F-F4F16B0AF513}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{87063B50-A13C-48F6-874F-F4F16B0AF513}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{87063B50-A13C-48F6-874F-F4F16B0AF513}.Release|x86.ActiveCfg = Release|Any CPU
+		{B823016C-AC86-48EF-94D9-A094AD0D64C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B823016C-AC86-48EF-94D9-A094AD0D64C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B823016C-AC86-48EF-94D9-A094AD0D64C9}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{B823016C-AC86-48EF-94D9-A094AD0D64C9}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{B823016C-AC86-48EF-94D9-A094AD0D64C9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B823016C-AC86-48EF-94D9-A094AD0D64C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B823016C-AC86-48EF-94D9-A094AD0D64C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B823016C-AC86-48EF-94D9-A094AD0D64C9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{B823016C-AC86-48EF-94D9-A094AD0D64C9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{B823016C-AC86-48EF-94D9-A094AD0D64C9}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
