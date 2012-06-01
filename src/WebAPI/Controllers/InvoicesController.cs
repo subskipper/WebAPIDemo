@@ -49,23 +49,23 @@ namespace WebAPI.Controllers
             return response;
         }
 
-        // PUT /api/invoices/5
-        //public HttpResponseMessage Put(string invoiceNumber, string newValue)
-        //{
+        // PUT
+        //TODO: Make a request object instead.
+        public HttpResponseMessage Put(string invoiceNumber, DateTime invoiceDate)
+        {
+            var invoice = m_InvoiceRepository.FindByInvoiceNumber(invoiceNumber).ToDto();
 
-        //    //TODO: Should update via EF.
-        //    var invoice = m_InvoiceRepository.FindByInvoiceNumber(invoiceNumber).ToDto();
+            if (invoice == null)
+                return new HttpResponseMessage(HttpStatusCode.NotFound);
 
-        //    if (invoice == null)
-        //        return new HttpResponseMessage(HttpStatusCode.NotFound);
+            invoice.InvoiceNumber = invoiceNumber;
+            invoice.InvoiceDate = invoiceDate;
 
-        //    invoice.InvoiceNumber = newValue;
+            m_InvoiceRepository.UpdateInvoice(invoice);
 
-        //    m_InvoiceRepository.RemoveAll(inv => inv.InvoiceNumber == invoiceNumber);
-        //    m_InvoiceRepository.Add(invoice);
-
-        //    return new HttpResponseMessage(HttpStatusCode.OK);
-        //}
+            //TODO: Create a proper update flow with a useful response.
+            return new HttpResponseMessage(HttpStatusCode.OK);
+        }
 
         // DELETE /api/invoice/5
         public HttpResponseMessage Delete(string invoiceNumber)

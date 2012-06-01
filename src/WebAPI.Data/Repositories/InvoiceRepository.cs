@@ -61,5 +61,19 @@ namespace WebAPI.Data.Repositories
         {
             return m_DbContext.Invoices.FirstOrDefault(c => c.InvoiceNumber == invoiceNumber);
         }
+
+        public void UpdateInvoice(InvoiceDTO invoice)
+        {
+            var dbInvoice = m_DbContext.Invoices.FirstOrDefault(inv => inv.InvoiceNumber == invoice.InvoiceNumber);
+
+            //ToDO: Fix this
+            if (dbInvoice == null)
+                return;
+
+            dbInvoice.InvoiceNumber = invoice.InvoiceNumber;
+            dbInvoice.InvoiceDate = invoice.InvoiceDate;
+
+            m_DbContext.SaveChanges();
+        }
     }
 }
