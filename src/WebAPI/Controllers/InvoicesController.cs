@@ -29,11 +29,10 @@ namespace WebAPI.Controllers
         // GET /api/invoices/5
         public HttpResponseMessage<InvoiceDTO> Get(string invoiceNumber)
         {
-            //TODO: Serve a 404 or 204 instead? 
             var invoice = m_InvoiceRepository.FindByInvoiceNumber(invoiceNumber).ToDto();
             
             if (invoice == null)
-                return new HttpResponseMessage<InvoiceDTO>(HttpStatusCode.OK);
+                return new HttpResponseMessage<InvoiceDTO>(HttpStatusCode.Accepted);
 
             return new HttpResponseMessage<InvoiceDTO>(invoice);
         }
