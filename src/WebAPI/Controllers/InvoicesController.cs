@@ -63,7 +63,7 @@ namespace WebAPI.Controllers
             m_InvoiceRepository.UpdateInvoice(invoice);
 
             //TODO: Create a proper update flow with a useful response.
-            return new HttpResponseMessage(HttpStatusCode.OK);
+            return new HttpResponseMessage(HttpStatusCode.Accepted);
         }
 
         // DELETE /api/invoice/5
